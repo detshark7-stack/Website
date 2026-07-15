@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Varny Schematics</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+html{
+    scroll-behavior:smooth;
+}
+body{
+    background:linear-gradient(135deg,#08111f,#0b1628,#030712);
+    color:#60a5fa;
+    min-height:100vh;
+    overflow-x:hidden;
+}
+/* Animated Background */
+body::before{
+    content:"";
+    position:fixed;
+    width:700px;
+    height:700px;
+    background:#2563eb55;
+    border-radius:50%;
+    filter:blur(180px);
+    top:-250px;
+    left:-250px;
+    z-index:-2;
+}
+body::after{
+    content:"";
+    position:fixed;
+    width:650px;
+    height:650px;
+    background:#3b82f655;
+    border-radius:50%;
+    filter:blur(180px);
+    bottom:-250px;
+    right:-250px;
+    z-index:-2;
+}
+/* Header */
+header{
+    position:sticky;
+    top:15px;
+    width:92%;
+    max-width:1400px;
+    margin:20px auto;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:18px 35px;
+    border-radius:18px;
+    backdrop-filter:blur(24px);
+    background:rgba(255,255,255,.05);
+    border:1px solid rgba(255,255,255,.08);
+    box-shadow:0 20px 45px rgba(0,0,0,.25);
+    z-index:100;
+}
+.logo{
+    font-size:30px;
+    font-weight:800;
+    color:#3b82f6;
+    letter-spacing:.5px;
+}
+nav{
+    display:flex;
+    gap:22px;
+}
+nav a{
+    color:#93c5fd;
+    text-decoration:none;
+    font-weight:500;
+    transition:.3s;
+    position:relative;
+    cursor:pointer;
+}
+nav a.active {
+    color:#60a5fa;
+}
+nav a::after{
+    content:"";
+    position:absolute;
+    bottom:-6px;
+    left:0;
+    width:0%;
+    height:2px;
+    background:#60a5fa;
+    transition:.3s;
+}
+nav a:hover, nav a.active{
+    color:#dbeafe;
+}
+nav a:hover::after, nav a.active::after{
+    width:100%;
+}
+/* Professional Search */
+.search-container {
+    position: relative;
+    max-width: 620px;
+    margin: 60px auto 0;
+}
+.search-container input {
+    width: 100%;
+    padding: 18px 24px 18px 58px;
+    border-radius: 9999px;
+    border: 2px solid rgba(59,130,246,.3);
+    background: rgba(15,23,42,.7);
+    color: #dbeafe;
+    font-size: 17px;
+    outline: none;
+    transition: all .4s ease;
+    box-shadow: 0 10px 30px rgba(0,0,0,.3);
+}
+.search-container input::placeholder {
+    color: #7e9ac9;
+}
+.search-container input:focus {
+    border-color: #60a5fa;
+    box-shadow: 0 0 0 4px rgba(59,130,246,.15), 0 15px 35px rgba(0,0,0,.4);
+}
+.search-icon {
+    position: absolute;
+    left: 26px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 22px;
+    color: #60a5fa;
+    pointer-events: none;
+}
+/* Tabs */
+.tabs {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin: 50px 0 40px;
+}
+.tab-btn {
+    padding: 14px 36px;
+    border: none;
+    background: rgba(255,255,255,.08);
+    color: #93c5fd;
+    font-size: 18px;
+    font-weight: 600;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all .3s;
+}
+.tab-btn.active {
+    background: linear-gradient(135deg,#3b82f6,#2563eb);
+    color: white;
+    box-shadow: 0 10px 30px rgba(59,130,246,.4);
+}
+/* Main Content */
+.container{
+    width:92%;
+    max-width:1400px;
+    margin:auto;
+    padding-bottom:100px;
+}
+.section-title{
+    font-size:34px;
+    margin-bottom:35px;
+    color:#60a5fa;
+    text-align:center;
+}
+.grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(360px,1fr));
+    gap:35px;
+}
+.card{
+    background:rgba(255,255,255,.05);
+    backdrop-filter:blur(25px);
+    border-radius:24px;
+    overflow:hidden;
+    border:1px solid rgba(255,255,255,.08);
+    transition:.35s;
+    box-shadow:0 15px 40px rgba(0,0,0,.25);
+}
+.card:hover{
+    transform:translateY(-12px) scale(1.02);
+    box-shadow: 0 20px 45px rgba(59,130,246,.2), 0 25px 60px rgba(0,0,0,.45);
+}
+.image{
+    height:280px;
+    overflow:hidden;
+    background:#0f172a;
+}
+.image img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    transition:.5s;
+}
+.card:hover img{
+    transform:scale(1.08);
+}
+.info{
+    padding:28px;
+}
+.info h2{
+    color:#60a5fa;
+    margin-bottom:12px;
+    font-size:24px;
+}
+.info p{
+    color:#bfdbfe;
+    line-height:1.7;
+    margin-bottom:20px;
+}
+.tags{
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+    margin-bottom:25px;
+}
+.tag{
+    padding:7px 15px;
+    border-radius:999px;
+    background:rgba(59,130,246,.15);
+    color:#60a5fa;
+    font-size:13px;
+    border:1px solid rgba(59,130,246,.2);
+}
+button{
+    width:100%;
+    padding:15px;
+    border:none;
+    border-radius:14px;
+    cursor:pointer;
+    font-size:16px;
+    font-weight:600;
+    color:white;
+    background:linear-gradient(135deg,#3b82f6,#2563eb);
+    transition:.3s;
+    box-shadow:0 12px 30px rgba(59,130,246,.35);
+}
+button:hover{
+    transform:translateY(-3px);
+    box-shadow:0 20px 40px rgba(59,130,246,.45);
+}
+footer{
+    text-align:center;
+    padding:35px;
+    color:#93c5fd;
+    border-top:1px solid rgba(255,255,255,.08);
+}
+.fade{animation:fade .8s ease;}
+@keyframes fade{from{opacity:0;transform:translateY(25px);}to{opacity:1;transform:translateY(0);}}
+@media(max-width:750px){
+    header{flex-direction:column;gap:15px;}
+    nav{gap:15px; flex-wrap:wrap; justify-content:center;}
+}
+</style>
+</head>
+<body>
+<header>
+<div class="logo">💎 Varny Schematics</div>
+<nav>
+<a onclick="switchServer('all')" class="active" id="nav-all">All</a>
+<a onclick="switchServer('donut')" id="nav-donut">DonutSMP</a>
+<a onclick="switchServer('varny')" id="nav-varny">VarnySMP</a>
+<a href="#" onclick="toggleCredits()">Credits</a>
+<a href="https://discord.gg/Thk2BzAMy" target="_blank">Discord</a>
+</nav>
+</header>
+
+<div id="creditsPanel" style="display:none;position:fixed;top:90px;right:30px;background:rgba(15,23,42,.95);padding:20px;border-radius:18px;border:1px solid #3b82f6;animation:pop .4s;color:#dbeafe;z-index:999">
+<h3>✨ Credits</h3>
+<p><b>Owner:</b> Varnyex</p>
+<p><b>Manager:</b> Varmyex</p>
+<p><b>Admin:</b> its_finly</p>
+<p><a style="color:#60a5fa" href="https://discord.gg/Thk2BzAMy" target="_blank">Join Discord</a></p>
+</div>
+<style>@keyframes pop{from{opacity:0;transform:translateY(-20px) scale(.8)}to{opacity:1;transform:translateY(0) scale(1)}}</style>
+
+
+<section class="hero fade">
+    <div class="search-container">
+        <span class="search-icon">🔍</span>
+        <input type="text" placeholder="Search schematics by name or type...">
+    </div>
+</section>
+
+<div class="container">
+    <div class="tabs">
+        <button class="tab-btn active" onclick="switchTab(0)">Free</button>
+    </div>
+
+    <!-- Free Tab -->
+    <div id="free-tab" class="tab-content">
+        <h2 class="section-title" id="server-title">All Schematics</h2>
+        <div class="grid">
+
+            <!-- Overworld -->
+            <div class="card fade varny-card">
+                <div class="image">
+                    <img src="https://cdn.discordapp.com/attachments/1521419479567831073/1526324591419719790/screenshot.png?ex=6a569c0c&is=6a554a8c&hm=46dd86c6d199c6f37f1d2ace5793db5860611c535da79871f4e859b7e8ce748a&" alt="Cobblestone Farm - Overworld">
+                </div>
+                <div class="info">
+                    <h2>Dumb And Dumber Cobblestone Farm V1</h2>
+                    <p>A simple yet efficient cobblestone farm designed for survival worlds. Fast, compact, reliable and extremely easy to build.</p>
+                    <div class="tags">
+                        <div class="tag">Farm</div>
+                        <div class="tag">Cobblestone</div>
+                        <div class="tag">Overworld</div>
+                        <div class="tag">V1</div>
+                        <div class="tag">VarnySMP</div>
+                    </div>
+                    <button onclick="downloadOverworld()">Download</button>
+                </div>
+            </div>
+
+            <!-- DonutSMP Small Kelp Farm -->
+            <div class="card fade donut-card">
+                <div class="image">
+                    <img src="https://cdn.discordapp.com/attachments/1521419479567831073/1526339144060768357/screenshot_1.png?ex=6a56a999&is=6a555819&hm=ccab675c0888292316a416edadae24ee2a324008ff294ab348d1ac70ac71f111&" alt="Small Kelp Farm">
+                </div>
+                <div class="info">
+                    <h2>Dumb and Dumber Small Kelp Farm V1</h2>
+                    <p>Compact and efficient small kelp farm. Works great in Overworld and The End.</p>
+                    <div class="tags">
+                        <div class="tag">Farm</div>
+                        <div class="tag">Kelp</div>
+                        <div class="tag">DonutSMP</div>
+                        <div class="tag">V1</div>
+                    </div>
+                    <button onclick="downloadKelpFarm()">Download</button>
+                </div>
+            </div>
+
+            <!-- DonutSMP Stash + Kelp Farm -->
+            <div class="card fade donut-card">
+                <div class="image">
+                    <img src="https://cdn.discordapp.com/attachments/1521419479567831073/1526351289120985170/screenshot_2.png?ex=6a56b4e9&is=6a556369&hm=f6cc4fae5618fdfdb330bc2f32501afda77c3532702bf98eb13b1c04768b3b10&" alt="Stash + Kelp Farm">
+                </div>
+                <div class="info">
+                    <h2>Dumb And Dumber Stash + Fast Kelp Farm</h2>
+                    <p>Advanced stash system combined with a fast kelp farm. Exclusive to DonutSMP.</p>
+                    <div class="tags">
+                        <div class="tag">Farm</div>
+                        <div class="tag">Stash</div>
+                        <div class="tag">Kelp</div>
+                        <div class="tag">DonutSMP</div>
+                        <div class="tag">V1</div>
+                    </div>
+                    <button onclick="downloadStashKelp()">Download</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- Stats -->
+<section class="container">
+<h2 class="section-title">Varny Statistics</h2>
+<div class="grid">
+    <div class="card"><div class="info"><h2>50+</h2><p>Schematics planned for future releases.</p></div></div>
+    <div class="card"><div class="info"><h2>100%</h2><p>Made for Minecraft survival players.</p></div></div>
+    <div class="card"><div class="info"><h2>24/7</h2><p>New projects being developed.</p></div></div>
+</div>
+</section>
+
+<footer>
+© 2026 Varny Schematics<br>
+Made for the Minecraft Community 💙
+</footer>
+
+<script>
+function toggleCredits(){const p=document.getElementById("creditsPanel");p.style.display=p.style.display=="block"?"none":"block";}
+// Server Filter
+let currentServer = 'all';
+function switchServer(server) {
+    currentServer = server;
+    document.querySelectorAll('nav a').forEach(link => link.classList.remove('active'));
+    if (server === 'all') document.getElementById('nav-all').classList.add('active');
+    if (server === 'donut') document.getElementById('nav-donut').classList.add('active');
+    if (server === 'varny') document.getElementById('nav-varny').classList.add('active');
+
+    const cards = document.querySelectorAll('.card');
+    cards.forEach(card => {
+        if (server === 'all') {
+            card.style.display = 'block';
+        } else if (server === 'donut') {
+            card.style.display = card.classList.contains('donut-card') ? 'block' : 'none';
+        } else if (server === 'varny') {
+            card.style.display = card.classList.contains('varny-card') ? 'block' : 'none';
+        }
+    });
+
+    const titleEl = document.getElementById('server-title');
+    if (server === 'donut') titleEl.textContent = "DonutSMP Schematics";
+    else if (server === 'varny') titleEl.textContent = "VarnySMP Schematics";
+    else titleEl.textContent = "All Schematics";
+}
+
+// Download functions
+function downloadOverworld() {
+    const link = document.createElement('a');
+    link.href = "https://cdn.discordapp.com/attachments/1521419479567831073/1526363285425750179/Dumb_And_Dumber_Cobblestone_Farm_V1_Overworld.litematic?ex=6a56c015&is=6a556e95&hm=4591260c5840df147d4117aeba692129d0b9b9c78bbc519ae576f4fea7856fc0&";
+    link.download = "Dumb_And_Dumber_Cobblestone_Farm_V1_Overworld.litematic";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+}
+
+function downloadKelpFarm() {
+    const link = document.createElement('a');
+    link.href = "https://cdn.discordapp.com/attachments/1521419479567831073/1526339224561909860/Dumb_and_Dumber_Small_Kelp_Farm_V1.litematic?ex=6a56a9ad&is=6a55582d&hm=d83229b57c42083180cab8d5d6f7e45e3893468eff05a35b4177887fccbfaae7&";
+    link.download = "Dumb_and_Dumber_Small_Kelp_Farm_V1.litematic";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+}
+
+function downloadStashKelp() {
+    const link = document.createElement('a');
+    link.href = "https://cdn.discordapp.com/attachments/1521419479567831073/1526351340425576578/Dumb_and_Dumber_Stash__Kelp_farm_V1_Fixed.litematic?ex=6a56b4f5&is=6a556375&hm=396476c23aee7ce598eec9d96ee52c6b8caf3072a5bad2be3ad91b11abd0f9c6&";
+    link.download = "Dumb_and_Dumber_Stash__Kelp_farm_V1_Fixed.litematic";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+}
+
+// Search
+const searchInput = document.querySelector(".search-container input");
+searchInput.addEventListener("input", () => {
+    const value = searchInput.value.toLowerCase();
+    document.querySelectorAll(".card").forEach(card => {
+        const title = card.querySelector("h2");
+        if (title) {
+            const shouldShow = title.textContent.toLowerCase().includes(value);
+            card.style.display = shouldShow && (
+                currentServer === 'all' || 
+                (currentServer === 'varny' && card.classList.contains('varny-card')) ||
+                (currentServer === 'donut' && card.classList.contains('donut-card'))
+            ) ? "block" : "none";
+        }
+    });
+});
+
+// Fade animation
+const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => { if(entry.isIntersecting) entry.target.style.opacity = "1"; });
+}, { threshold: .15 });
+document.querySelectorAll(".fade").forEach(item => observer.observe(item));
+</script>
+</body>
+</html>
